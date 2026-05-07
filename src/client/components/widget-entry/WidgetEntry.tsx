@@ -1,9 +1,14 @@
+import { logger } from "@/client/lib/logger";
+import { useJourneyStarted } from "@/client/store/user-journey-store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const WidgetEntry = () => {
   const [counter, setCounter] = useState(0);
   const { t } = useTranslation();
+  const { isStarted, startJourney } = useJourneyStarted();
+
+  logger.log("Journey started:", isStarted);
   return (
     <div>
       <h1>{t("welcome")}</h1>
@@ -30,6 +35,7 @@ const WidgetEntry = () => {
           </a>
         </li>
       </ul>
+      <button onClick={startJourney}>Start Journey</button>
     </div>
   );
 };
