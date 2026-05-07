@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import root from "react-shadow";
 import { StyleSheetManager } from "styled-components";
 import baseStyles from "@/client/styles/styles.css?inline";
 import { ErrorBoundaryDemo } from "@/client/components/error-boundary/ErrorBoundaryDemo";
 import WidgetEntry from "@/client/components/widget-entry/WidgetEntry";
+import i18n from "./i18n";
+import type { WidgetConfig } from "@/client/types/types";
 
-function App() {
+function App({ config }: { config: WidgetConfig }) {
   const [styleTarget, setStyleTarget] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    i18n.changeLanguage(config.language);
+  }, [config.language]);
 
   return (
     <root.div>

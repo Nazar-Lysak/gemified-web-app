@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const WidgetEntry = () => {
   const [counter, setCounter] = useState(0);
+  const { t } = useTranslation();
   return (
     <div>
-      <h1>Welcome to Gemified Web App!</h1>
-      <h2>Subheading</h2>
+      <h1>{t("welcome")}</h1>
+      <h2>{t("login")}</h2>
       <p>This is a placeholder for the actual widget content.</p>
       <div>
         <p>Counter: {counter}</p>

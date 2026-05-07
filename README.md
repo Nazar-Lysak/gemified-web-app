@@ -17,11 +17,11 @@ React 19 + TypeScript + Vite boilerplate for an embeddable widget. Single source
 
 ## Build variants
 
-| Build          | Output                                 | Usage                                 |
-| -------------- | -------------------------------------- | ------------------------------------- |
+| Build          | Output                            | Usage                                 |
+| -------------- | --------------------------------- | ------------------------------------- |
 | **CDN (IIFE)** | `dist/cdn/gemifiedWebApp.iife.js` | Embed via `<script>` on any host page |
-| **Standalone** | `dist/standalone/index.{html,js}`      | Self-contained SPA                    |
-| **Demo**       | `dist/demo/index.{html,js}`            | Demo/preview page                     |
+| **Standalone** | `dist/standalone/index.{html,js}` | Self-contained SPA                    |
+| **Demo**       | `dist/demo/index.{html,js}`       | Demo/preview page                     |
 
 ## Getting started
 

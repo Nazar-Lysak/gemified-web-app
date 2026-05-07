@@ -3,11 +3,9 @@ import { createRoot } from "react-dom/client";
 import App from "@/App";
 import { ErrorBoundary } from "@/client/components/error-boundary";
 import { logger, setDebugEnabled } from "@/client/lib/logger";
+import "@/i18n";
 
-interface WidgetConfig {
-  baseURI: string;
-  language: string;
-}
+import type { WidgetConfig } from "@/client/types/types";
 
 const rootElement = document.getElementById("gemified-web-app");
 const scriptElement = document.currentScript as HTMLScriptElement;
@@ -24,9 +22,6 @@ if (!rootElement) {
   throw new Error("Widget container not found");
 }
 
-logger.log("Current Website URL =>", config.baseURI);
-logger.log("Detected Language =>", config.language);
-
 createRoot(rootElement).render(
   <StrictMode>
     <ErrorBoundary
@@ -35,7 +30,7 @@ createRoot(rootElement).render(
         logger.error("[Widget] Error info:", errorInfo);
       }}
     >
-      <App />
+      <App config={config} />
     </ErrorBoundary>
   </StrictMode>
 );
