@@ -3,7 +3,7 @@
  * Add domains without protocol (http/https) and without trailing slash.
  */
 const localHosts = ["localhost", "127.0.0.1"];
-const productionDomains = ["example.com", "www.example.com", "uat-74995-petcare-purinattt-unitedkingdom.pantheonsite.io"];
+const productionDomains = ["uat-74995-petcare-purinattt-unitedkingdom.pantheonsite.io"];
 
 export const ALLOWED_DOMAINS = [
   ...localHosts,
