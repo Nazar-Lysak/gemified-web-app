@@ -48,38 +48,37 @@ const WidgetEntry = () => {
         </li>
       </ul>
       <button onClick={startJourney}>Start Journey</button>
-      <div style={{ position: "relative", width: "100%" }}>
-        {isVideoLoading && (
+      {isStarted && isVideoLoading && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            zIndex: 10,
+          }}
+        >
           <div
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(0, 0, 0, 0.7)",
-              zIndex: 10,
+              border: "4px solid #f3f3f3",
+              borderTop: "4px solid #3498db",
+              borderRadius: "50%",
+              width: "50px",
+              height: "50px",
+              animation: "spin 1s linear infinite",
             }}
-          >
-            <div
-              style={{
-                border: "4px solid #f3f3f3",
-                borderTop: "4px solid #3498db",
-                borderRadius: "50%",
-                width: "50px",
-                height: "50px",
-                animation: "spin 1s linear infinite",
-              }}
-            />
-          </div>
-        )}
-        <video
+          />
+        </div>
+      )}
+      {isStarted && (
+        <div style={{ position: "relative", width: "100%" }}>
+          <video
           autoPlay
-          muted
-          loop
           playsInline
           preload="auto"
           style={{ width: "100%", height: "auto", display: "block" }}
@@ -93,7 +92,8 @@ const WidgetEntry = () => {
           <source src={t("video-1").replace(".webm", ".mp4")} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      </div>
+        </div>
+      )}
       </div>
     </>
   );
