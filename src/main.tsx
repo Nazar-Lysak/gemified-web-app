@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "@/App";
 import { ErrorBoundary } from "@/client/components/error-boundary";
+import { WidgetGuard } from "@/client/components/widget-guard/WidgetGuard";
 import { logger, setDebugEnabled } from "@/client/lib/logger";
 import "@/i18n";
 
@@ -30,7 +31,9 @@ createRoot(rootElement).render(
         logger.error("[Widget] Error info:", errorInfo);
       }}
     >
-      <App config={config} />
+      <WidgetGuard>
+        <App config={config} />
+      </WidgetGuard>
     </ErrorBoundary>
   </StrictMode>
 );
