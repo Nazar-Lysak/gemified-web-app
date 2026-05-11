@@ -18,17 +18,17 @@ export const ALLOWED_DOMAINS = [
  */
 export const isAllowedDomain = (hostname: string): boolean => {
   const domainWithoutPort = hostname.split(":")[0];
-  
+
   return ALLOWED_DOMAINS.some((allowedDomain) => {
     if (domainWithoutPort === allowedDomain) {
       return true;
     }
-    
+
     if (allowedDomain.startsWith("*.")) {
       const baseDomain = allowedDomain.slice(2);
       return domainWithoutPort.endsWith(`.${baseDomain}`) || domainWithoutPort === baseDomain;
     }
-    
+
     return false;
   });
 };
@@ -41,6 +41,6 @@ export const isWidgetAllowed = (): boolean => {
   if (typeof window === "undefined") {
     return false;
   }
-  
+
   return isAllowedDomain(window.location.hostname);
 };
