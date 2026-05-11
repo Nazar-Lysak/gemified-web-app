@@ -76,7 +76,7 @@ const WidgetEntry = () => {
         </div>
       )}
       {isStarted && (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div style={{ position: "relative", width: "100%", backgroundColor: "#303030" }}>
           <video
           autoPlay
           playsInline
