@@ -37,6 +37,7 @@
     ]
   },
   "dependencies": {
+    "@panzoom/panzoom": "^4.6.2",
     "html-react-parser": "^5.2.17",
     "i18next": "^26.0.10",
     "motion": "^12.34.1",

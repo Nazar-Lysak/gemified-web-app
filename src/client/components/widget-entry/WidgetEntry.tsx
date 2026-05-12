@@ -2,6 +2,7 @@ import { logger } from "@/client/lib/logger";
 import { useJourneyStarted } from "@/client/store/user-journey-store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import InteractiveMap from "../interactive-map/InteractiveMap";
 
 // Додаємо CSS для анімації спіннера
 const spinnerStyles = `
@@ -94,6 +95,7 @@ const WidgetEntry = () => {
             </video>
           </div>
         )}
+        <InteractiveMap />
       </div>
     </>
   );
