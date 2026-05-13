@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, type ReactElement } from "react";
 import Panzoom, { type PanzoomObject } from "@panzoom/panzoom";
 import { useTranslation } from "react-i18next";
 import { logger } from "@/client/lib/logger";
+import ButtonIconTogle from "@/client/UI/button-icon-togle/ButtonIconTogle";
 
 const InteractiveMap = (): ReactElement => {
   const [showVideo, setShowVideo] = useState(false);
@@ -48,47 +49,23 @@ const InteractiveMap = (): ReactElement => {
           }}
         />
         {!showVideo && (
-          <button
-            style={{
-              position: "absolute",
-              top: "60%",
-              left: "50%",
-              cursor: "pointer",
-              zIndex: 10,
-              width: "80px",
-              height: "80px",
-              borderRadius: "50%",
-              border: "none",
-              backgroundColor: "#4CAF50",
-              color: "white",
-              fontSize: "12px",
-              fontWeight: "bold",
-              boxShadow: "0 4px 12px rgba(76, 175, 80, 0.4)",
-              transition: "all 0.3s ease",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.1)";
-              e.currentTarget.style.backgroundColor = "#45a049";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.backgroundColor = "#4CAF50";
-            }}
-            onClick={() => setShowVideo(true)}
-          >
-            🌿 Play
-          </button>
+          <ButtonIconTogle
+            handleClick={() => setShowVideo(true)}
+            styles={{ position: "absolute", top: "60%", left: "50%", zIndex: 10 }}
+          />
         )}
         {showVideo && (
           <video
             autoPlay
             playsInline
             preload="auto"
-            style={{ width: "500px", height: "auto", position: "absolute", top: "62%", left: "47%" }}
+            style={{
+              width: "500px",
+              height: "auto",
+              position: "absolute",
+              top: "62%",
+              left: "47%",
+            }}
             onEnded={() => {
               setShowVideo(false);
             }}

@@ -3,6 +3,7 @@ import { useJourneyStarted } from "@/client/store/user-journey-store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import InteractiveMap from "../interactive-map/InteractiveMap";
+import ButtonIconTogle from "@/client/UI/button-icon-togle/ButtonIconTogle";
 
 // Додаємо CSS для анімації спіннера
 const spinnerStyles = `
@@ -48,6 +49,7 @@ const WidgetEntry = () => {
             </a>
           </li>
         </ul>
+        <ButtonIconTogle handleClick={() => logger.log("ButtonIconTogle clicked")} />
         <button onClick={startJourney}>Start Journey</button>
         {isStarted && isVideoLoading && (
           <div
@@ -64,16 +66,18 @@ const WidgetEntry = () => {
               zIndex: 10,
             }}
           >
-            <div
-              style={{
-                border: "4px solid #f3f3f3",
-                borderTop: "4px solid #3498db",
-                borderRadius: "50%",
-                width: "50px",
-                height: "50px",
-                animation: "spin 1s linear infinite",
-              }}
-            />
+            <div>
+              <div
+                style={{
+                  border: "4px solid #f3f3f3",
+                  borderTop: "4px solid #3498db",
+                  borderRadius: "50%",
+                  width: "50px",
+                  height: "50px",
+                  animation: "spin 1s linear infinite",
+                }}
+              />
+            </div>
           </div>
         )}
         {isStarted && (
