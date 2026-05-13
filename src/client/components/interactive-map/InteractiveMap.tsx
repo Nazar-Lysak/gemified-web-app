@@ -26,6 +26,24 @@ const Wrapper = styled.div`
   max-height: 600px;
 `;
 
+const ButtonWrapper = styled.div<{ $delay: number }>`
+  position: absolute;
+  animation: fadeInScale 0.4s ease-out forwards;
+  animation-delay: ${props => props.$delay}s;
+  opacity: 0;
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
 interface JourneyItem {
   id: string;
   checked: boolean;
@@ -120,17 +138,20 @@ const InteractiveMap = (): ReactElement => {
         <MapImage src={t("map-image")} alt="Zoomable" />
 
         {!activeVideoId &&
-          journeyItems.map((item) => (
-            <ButtonIconTogle
-              key={item.id}
-              handleClick={() => handleButtonClick(item.id)}
-              isWatched={item.checked}
-              styles={{
-                position: "absolute",
+          journeyItems.map((item, index) => (
+            <ButtonWrapper 
+              key={item.id} 
+              $delay={index * 0.3}
+              style={{
                 ...item.buttonPosition,
                 zIndex: 10,
               }}
-            />
+            >
+              <ButtonIconTogle
+                handleClick={() => handleButtonClick(item.id)}
+                isWatched={item.checked}
+              />
+            </ButtonWrapper>
           ))}
 
         {activeVideoId &&
