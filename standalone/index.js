@@ -111,7 +111,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   padding: 6px;
   height: 100px;
   width: 100px;
-  animation: float 3s ease-in-out infinite;
+  animation: ${n=>n.$isWatched?"none":"float 3s ease-in-out infinite"};
 
   @keyframes float {
     0%,
@@ -125,7 +125,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       transform: translateY(0) rotate(-5deg);
     }
   }
-`,_T=n=>{const i=Ju.c(6),{handleClick:l,styles:s,isWatched:h}=n;let g;i[0]!==h?(g=Vt.jsx(DT,{checked:h}),i[0]=h,i[1]=g):g=i[1];let m;return i[2]!==l||i[3]!==s||i[4]!==g?(m=Vt.jsx(NM,{onClick:l,style:s,children:g}),i[2]=l,i[3]=s,i[4]=g,i[5]=m):m=i[5],m},LM=n=>{const i=Ju.c(11),{videoUrl:l,onEnded:s,onError:h,styles:g}=n;let m,b;i[0]!==l?(m=Vt.jsx("source",{src:l,type:"video/webm"}),b=l.replace(".webm",".mp4"),i[0]=l,i[1]=m,i[2]=b):(m=i[1],b=i[2]);let x;i[3]!==b?(x=Vt.jsx("source",{src:b,type:"video/mp4"}),i[3]=b,i[4]=x):x=i[4];let E;return i[5]!==s||i[6]!==h||i[7]!==g||i[8]!==m||i[9]!==x?(E=Vt.jsxs("video",{autoPlay:!0,playsInline:!0,preload:"auto",onEnded:s,onError:h,style:g,children:[m,x,"Your browser does not support the video tag."]}),i[5]=s,i[6]=h,i[7]=g,i[8]=m,i[9]=x,i[10]=E):E=i[10],E},BM=Hi.img`
+`,_T=n=>{const i=Ju.c(7),{handleClick:l,styles:s,isWatched:h}=n;let g;i[0]!==h?(g=Vt.jsx(DT,{checked:h}),i[0]=h,i[1]=g):g=i[1];let m;return i[2]!==l||i[3]!==h||i[4]!==s||i[5]!==g?(m=Vt.jsx(NM,{onClick:l,style:s,$isWatched:h,children:g}),i[2]=l,i[3]=h,i[4]=s,i[5]=g,i[6]=m):m=i[6],m},LM=n=>{const i=Ju.c(11),{videoUrl:l,onEnded:s,onError:h,styles:g}=n;let m,b;i[0]!==l?(m=Vt.jsx("source",{src:l,type:"video/webm"}),b=l.replace(".webm",".mp4"),i[0]=l,i[1]=m,i[2]=b):(m=i[1],b=i[2]);let x;i[3]!==b?(x=Vt.jsx("source",{src:b,type:"video/mp4"}),i[3]=b,i[4]=x):x=i[4];let E;return i[5]!==s||i[6]!==h||i[7]!==g||i[8]!==m||i[9]!==x?(E=Vt.jsxs("video",{autoPlay:!0,playsInline:!0,preload:"auto",onEnded:s,onError:h,style:g,children:[m,x,"Your browser does not support the video tag."]}),i[5]=s,i[6]=h,i[7]=g,i[8]=m,i[9]=x,i[10]=E):E=i[10],E},BM=Hi.img`
   max-width: 100%;
   max-height: 100%;
   width: auto;
