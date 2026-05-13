@@ -26,23 +26,69 @@ const Wrapper = styled.div`
   max-height: 600px;
 `;
 
+interface JourneyItem {
+  id: string;
+  checked: boolean;
+  videoKey: string;
+  buttonPosition: { top: string; left?: string; right?: string };
+  videoPosition: { top: string; left?: string; right?: string; width: string };
+}
+
 const InteractiveMap = (): ReactElement => {
-  const [showVideo, setShowVideo] = useState(false);
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const elemRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
-  const interactiveMapJourney = [
+  const [journeyItems, setJourneyItems] = useState<JourneyItem[]>([
     {
       id: "map-1",
       checked: false,
+      videoKey: "video-1",
+      buttonPosition: { top: "58%", left: "38%" },
+      videoPosition: { top: "60%", left: "47%", width: "360px" },
     },
     {
       id: "map-2",
       checked: false,
+      videoKey: "video-2",
+      buttonPosition: { top: "45%", left: "49%" },
+      videoPosition: { top: "8%", left: "30%", width: "660px" },
     },
-  ];
+    {
+      id: "map-3",
+      checked: false,
+      videoKey: "video-3",
+      buttonPosition: { top: "40%", right: "20%" },
+      videoPosition: { top: "25%", right: "8%", width: "440px" },
+    },
+    {
+      id: "map-4",
+      checked: false,
+      videoKey: "video-4",
+      buttonPosition: { top: "30%", right: "4%" },
+      videoPosition: { top: "0", right: "0", width: "340px" },
+    },
+    {
+      id: "map-5",
+      checked: false,
+      videoKey: "video-5",
+      buttonPosition: { top: "65%", left: "14%" },
+      videoPosition: { top: "47%", left: "0%", width: "340px" },
+    },
+  ]);
 
-  logger.log("InteractiveMap journey:", interactiveMapJourney);
+  const handleButtonClick = (id: string) => {
+    setActiveVideoId(id);
+  };
+
+  const handleVideoEnd = (id: string) => {
+    setJourneyItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, checked: true } : item))
+    );
+    setActiveVideoId(null);
+  };
+
+  logger.log("InteractiveMap journey:", journeyItems);
 
   useEffect(() => {
     if (!elemRef.current) return;
@@ -72,104 +118,38 @@ const InteractiveMap = (): ReactElement => {
     <Wrapper>
       <MapContainer ref={elemRef}>
         <MapImage src={t("map-image")} alt="Zoomable" />
-        {!showVideo && (
-          <>
+
+        {!activeVideoId &&
+          journeyItems.map((item) => (
             <ButtonIconTogle
-              handleClick={() => setShowVideo(true)}
-              isWatched={false}
-              styles={{ position: "absolute", top: "58%", left: "38%", zIndex: 10 }}
-            />
-            <ButtonIconTogle
-              handleClick={() => setShowVideo(true)}
-              isWatched={false}
-              styles={{ position: "absolute", top: "45%", left: "49%", zIndex: 10 }}
-            />
-            <ButtonIconTogle
-              handleClick={() => setShowVideo(true)}
-              isWatched={false}
-              styles={{ position: "absolute", top: "45%", left: "49%", zIndex: 10 }}
-            />
-            <ButtonIconTogle
-              handleClick={() => setShowVideo(true)}
-              isWatched={false}
-              styles={{ position: "absolute", top: "40%", right: "20%", zIndex: 10 }}
-            />
-            <ButtonIconTogle
-              handleClick={() => setShowVideo(true)}
-              isWatched={false}
-              styles={{ position: "absolute", top: "30%", right: "4%", zIndex: 10 }}
-            />
-            <ButtonIconTogle
-              handleClick={() => setShowVideo(true)}
-              isWatched={false}
-              styles={{ position: "absolute", top: "65%", left: "14%", zIndex: 10 }}
-            />
-          </>
-        )}
-        {showVideo && (
-          <>
-            <VideoPlayer
-              videoUrl={t("video-1")}
-              onEnded={() => setShowVideo(false)}
-              onError={(e) => logger.error("Video error:", e)}
+              key={item.id}
+              handleClick={() => handleButtonClick(item.id)}
+              isWatched={item.checked}
               styles={{
-                width: "360px",
-                height: "auto",
                 position: "absolute",
-                top: "62%",
-                left: "47%",
+                ...item.buttonPosition,
+                zIndex: 10,
               }}
             />
-            <VideoPlayer
-              videoUrl={t("video-2")}
-              onEnded={() => setShowVideo(false)}
-              onError={(e) => logger.error("Video error:", e)}
-              styles={{
-                width: "660px",
-                height: "auto",
-                position: "absolute",
-                top: "8%",
-                left: "30%",
-              }}
-            />
-            <VideoPlayer
-              videoUrl={t("video-3")}
-              onEnded={() => setShowVideo(false)}
-              onError={(e) => logger.error("Video error:", e)}
-              styles={{
-                width: "440px",
-                height: "auto",
-                position: "absolute",
-                top: "25%",
-                right: "8%",
-              }}
-            />
-            <VideoPlayer
-              videoUrl={t("video-4")}
-              onEnded={() => setShowVideo(false)}
-              onError={(e) => logger.error("Video error:", e)}
-              styles={{
-                width: "340px",
-                height: "auto",
-                position: "absolute",
-                top: "0",
-                right: "0",
-              }}
-            />
-            <VideoPlayer
-              videoUrl={t("video-5")}
-              onEnded={() => setShowVideo(false)}
-              onError={(e) => logger.error("Video error:", e)}
-              styles={{
-                width: "340px",
-                height: "auto",
-                position: "absolute",
-                top: "47%",
-                left: "0%",
-              }}
-            />
-          </>
-        )}
+          ))}
+
+        {activeVideoId &&
+          journeyItems.map((item) => {
+            if (activeVideoId !== item.id) return null;
+            return (
+              <VideoPlayer
+                key={`video-${item.id}`}
+                videoUrl={t(item.videoKey)}
+                onEnded={() => handleVideoEnd(item.id)}
+                onError={(e) => logger.error("Video error:", e)}
+                styles={{
+                  height: "auto",
+                  position: "absolute",
+                  ...item.videoPosition,
+                }}
+              />
+            );
+          })}
       </MapContainer>
     </Wrapper>
   );
