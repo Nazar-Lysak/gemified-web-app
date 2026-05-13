@@ -1,6 +1,5 @@
 import GreenHandIcon from "@/client/assets/icons/GreenHandIcon";
 import styled from "styled-components";
-import { motion } from "motion/react";
 
 interface ButtonIconTogleProps {
   handleClick: () => void;
@@ -8,7 +7,7 @@ interface ButtonIconTogleProps {
   styles?: React.CSSProperties;
 }
 
-const Button = styled(motion.button)`
+const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -18,23 +17,24 @@ const Button = styled(motion.button)`
   padding: 6px;
   height: 100px;
   width: 100px;
-  will-change: transform;
+  animation: float 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-10px) rotate(5deg);
+    }
+    66% {
+      transform: translateY(0) rotate(-5deg);
+    }
+  }
 `;
 
-const ANIMATION_CONFIG = {
-  animate: {
-    y: [0, -10, 0],
-    rotate: [0, 5, -5, 0],
-  },
-  transition: {
-    duration: 3,
-    repeat: Infinity,
-    ease: "easeInOut" as const,
-  },
-};
-
 const ButtonIconTogle = ({ handleClick, styles, isWatched }: ButtonIconTogleProps) => (
-  <Button {...ANIMATION_CONFIG} onClick={handleClick} style={styles}>
+  <Button onClick={handleClick} style={styles}>
     <GreenHandIcon checked={isWatched} />
   </Button>
 );

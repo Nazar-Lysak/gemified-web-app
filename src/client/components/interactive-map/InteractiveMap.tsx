@@ -73,25 +73,102 @@ const InteractiveMap = (): ReactElement => {
       <MapContainer ref={elemRef}>
         <MapImage src={t("map-image")} alt="Zoomable" />
         {!showVideo && (
-          <ButtonIconTogle
-            handleClick={() => setShowVideo(true)}
-            isWatched={false}
-            styles={{ position: "absolute", top: "60%", left: "50%", zIndex: 10 }}
-          />
+          <>
+            <ButtonIconTogle
+              handleClick={() => setShowVideo(true)}
+              isWatched={false}
+              styles={{ position: "absolute", top: "58%", left: "38%", zIndex: 10 }}
+            />
+            <ButtonIconTogle
+              handleClick={() => setShowVideo(true)}
+              isWatched={false}
+              styles={{ position: "absolute", top: "45%", left: "49%", zIndex: 10 }}
+            />
+            <ButtonIconTogle
+              handleClick={() => setShowVideo(true)}
+              isWatched={false}
+              styles={{ position: "absolute", top: "45%", left: "49%", zIndex: 10 }}
+            />
+            <ButtonIconTogle
+              handleClick={() => setShowVideo(true)}
+              isWatched={false}
+              styles={{ position: "absolute", top: "40%", right: "20%", zIndex: 10 }}
+            />
+            <ButtonIconTogle
+              handleClick={() => setShowVideo(true)}
+              isWatched={false}
+              styles={{ position: "absolute", top: "30%", right: "4%", zIndex: 10 }}
+            />
+            <ButtonIconTogle
+              handleClick={() => setShowVideo(true)}
+              isWatched={false}
+              styles={{ position: "absolute", top: "65%", left: "14%", zIndex: 10 }}
+            />
+          </>
         )}
         {showVideo && (
-          <VideoPlayer
-            videoUrl={t("video-1")}
-            onEnded={() => setShowVideo(false)}
-            onError={(e) => logger.error("Video error:", e)}
-            styles={{
-              width: "360px",
-              height: "auto",
-              position: "absolute",
-              top: "62%",
-              left: "47%",
-            }}
-          />
+          <>
+            <VideoPlayer
+              videoUrl={t("video-1")}
+              onEnded={() => setShowVideo(false)}
+              onError={(e) => logger.error("Video error:", e)}
+              styles={{
+                width: "360px",
+                height: "auto",
+                position: "absolute",
+                top: "62%",
+                left: "47%",
+              }}
+            />
+            <VideoPlayer
+              videoUrl={t("video-2")}
+              onEnded={() => setShowVideo(false)}
+              onError={(e) => logger.error("Video error:", e)}
+              styles={{
+                width: "660px",
+                height: "auto",
+                position: "absolute",
+                top: "8%",
+                left: "30%",
+              }}
+            />
+            <VideoPlayer
+              videoUrl={t("video-3")}
+              onEnded={() => setShowVideo(false)}
+              onError={(e) => logger.error("Video error:", e)}
+              styles={{
+                width: "440px",
+                height: "auto",
+                position: "absolute",
+                top: "25%",
+                right: "8%",
+              }}
+            />
+            <VideoPlayer
+              videoUrl={t("video-4")}
+              onEnded={() => setShowVideo(false)}
+              onError={(e) => logger.error("Video error:", e)}
+              styles={{
+                width: "340px",
+                height: "auto",
+                position: "absolute",
+                top: "0",
+                right: "0",
+              }}
+            />
+            <VideoPlayer
+              videoUrl={t("video-5")}
+              onEnded={() => setShowVideo(false)}
+              onError={(e) => logger.error("Video error:", e)}
+              styles={{
+                width: "340px",
+                height: "auto",
+                position: "absolute",
+                top: "47%",
+                left: "0%",
+              }}
+            />
+          </>
         )}
       </MapContainer>
     </Wrapper>

@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion";
 import { logger } from "@/client/lib/logger";
 import { useJourneyStarted } from "@/client/store/user-journey-store";
 import { useTranslation } from "react-i18next";
@@ -29,8 +30,20 @@ const WidgetEntry = () => {
           </li>
         </ul>
         <ButtonIconTogle handleClick={() => startJourney()} isWatched={isStarted} />
-        
-        <InteractiveMap />
+
+        <AnimatePresence mode="wait">
+          {isStarted && (
+            <motion.div
+              key="interactive-map"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              <InteractiveMap />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
