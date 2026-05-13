@@ -33,7 +33,7 @@ const ANIMATION_CONFIG = {
 };
 
 const ButtonIconTogle = ({ handleClick, styles }: ButtonIconTogleProps) => (
-  <Button {...ANIMATION_CONFIG} onClick={handleClick} style={styles}>
+  <Button onClick={handleClick} style={styles}>
     <GreenHandIcon />
   </Button>
 );

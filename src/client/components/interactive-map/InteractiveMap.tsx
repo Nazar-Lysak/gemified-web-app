@@ -16,12 +16,13 @@ const MapImage = styled.img`
 `;
 
 const MapContainer = styled.div`
-  width: 2000px;
-  height: 957px;
+  width: 1253px;
+  height: 600px;
   position: relative;
 `;
 
 const Wrapper = styled.div`
+  max-width: 1253px;
   max-height: 600px;
 `;
 
@@ -29,6 +30,19 @@ const InteractiveMap = (): ReactElement => {
   const [showVideo, setShowVideo] = useState(false);
   const elemRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
+
+  const interactiveMapJourney = [
+    {
+      id: "map-1",
+      checked: false,
+    },
+    {
+      id: "map-2",
+      checked: false,
+    },
+  ];
+
+  logger.log("InteractiveMap journey:", interactiveMapJourney);
 
   useEffect(() => {
     if (!elemRef.current) return;
@@ -70,7 +84,7 @@ const InteractiveMap = (): ReactElement => {
             onEnded={() => setShowVideo(false)}
             onError={(e) => logger.error("Video error:", e)}
             styles={{
-              width: "500px",
+              width: "360px",
               height: "auto",
               position: "absolute",
               top: "62%",
