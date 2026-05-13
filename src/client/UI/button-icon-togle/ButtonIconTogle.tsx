@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 
 interface ButtonIconTogleProps {
   handleClick: () => void;
+  isWatched?: boolean;
   styles?: React.CSSProperties;
 }
 
@@ -32,9 +33,9 @@ const ANIMATION_CONFIG = {
   },
 };
 
-const ButtonIconTogle = ({ handleClick, styles }: ButtonIconTogleProps) => (
-  <Button onClick={handleClick} style={styles}>
-    <GreenHandIcon />
+const ButtonIconTogle = ({ handleClick, styles, isWatched }: ButtonIconTogleProps) => (
+  <Button {...ANIMATION_CONFIG} onClick={handleClick} style={styles}>
+    <GreenHandIcon checked={isWatched} />
   </Button>
 );
 

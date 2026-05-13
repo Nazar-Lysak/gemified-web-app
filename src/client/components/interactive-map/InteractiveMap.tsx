@@ -75,6 +75,7 @@ const InteractiveMap = (): ReactElement => {
         {!showVideo && (
           <ButtonIconTogle
             handleClick={() => setShowVideo(true)}
+            isWatched={false}
             styles={{ position: "absolute", top: "60%", left: "50%", zIndex: 10 }}
           />
         )}
