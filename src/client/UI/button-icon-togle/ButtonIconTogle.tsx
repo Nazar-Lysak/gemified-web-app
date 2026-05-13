@@ -7,7 +7,7 @@ interface ButtonIconTogleProps {
   styles?: React.CSSProperties;
 }
 
-const Button = styled.button`
+const Button = styled.button<{ $isWatched?: boolean }>`
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -17,7 +17,7 @@ const Button = styled.button`
   padding: 6px;
   height: 100px;
   width: 100px;
-  animation: float 3s ease-in-out infinite;
+  animation: ${props => props.$isWatched ? 'none' : 'float 3s ease-in-out infinite'};
 
   @keyframes float {
     0%,
@@ -34,7 +34,7 @@ const Button = styled.button`
 `;
 
 const ButtonIconTogle = ({ handleClick, styles, isWatched }: ButtonIconTogleProps) => (
-  <Button onClick={handleClick} style={styles}>
+  <Button onClick={handleClick} style={styles} $isWatched={isWatched}>
     <GreenHandIcon checked={isWatched} />
   </Button>
 );
