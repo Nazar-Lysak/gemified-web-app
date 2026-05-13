@@ -38,13 +38,11 @@
   },
   "dependencies": {
     "@panzoom/panzoom": "^4.6.2",
-    "html-react-parser": "^5.2.17",
     "i18next": "^26.0.10",
     "motion": "^12.34.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^17.0.7",
-    "react-player": "^3.4.0",
     "react-shadow": "^20.6.0",
     "styled-components": "^6.3.9",
     "styled-normalize": "^8.1.1",
