@@ -1,10 +1,12 @@
+import { memo } from "react";
+
 interface GreenHandIconProps {
   darkGreen?: string;
   lightGreen?: string;
   background?: string;
 }
 
-const GreenHandIcon = (props: GreenHandIconProps) => {
+const GreenHandIcon = memo((props: GreenHandIconProps) => {
   const { darkGreen = "#122518", lightGreen = "#70b356", background = "#fff" } = props;
   return (
     <svg
@@ -37,6 +39,8 @@ const GreenHandIcon = (props: GreenHandIconProps) => {
       />
     </svg>
   );
-};
+});
+
+GreenHandIcon.displayName = "GreenHandIcon";
 
 export default GreenHandIcon;

@@ -1,8 +1,29 @@
 import { useState, useEffect, useRef, type ReactElement } from "react";
 import Panzoom, { type PanzoomObject } from "@panzoom/panzoom";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { logger } from "@/client/lib/logger";
 import ButtonIconTogle from "@/client/UI/button-icon-togle/ButtonIconTogle";
+import VideoPlayer from "@/client/UI/video-player/VideoPlayer";
+
+const MapImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+`;
+
+const MapContainer = styled.div`
+  width: 2000px;
+  height: 957px;
+  position: relative;
+`;
+
+const Wrapper = styled.div`
+  max-height: 600px;
+`;
 
 const InteractiveMap = (): ReactElement => {
   const [showVideo, setShowVideo] = useState(false);
@@ -34,20 +55,9 @@ const InteractiveMap = (): ReactElement => {
   }, []);
 
   return (
-    <div style={{ maxHeight: "600px" }}>
-      <div ref={elemRef} style={{ width: "2000px", height: "957px", position: "relative" }}>
-        <img
-          src={t("map-image")}
-          alt="Zoomable"
-          style={{
-            maxWidth: "100%",
-            maxHeight: "100%",
-            width: "auto",
-            height: "auto",
-            display: "block",
-            objectFit: "contain",
-          }}
-        />
+    <Wrapper>
+      <MapContainer ref={elemRef}>
+        <MapImage src={t("map-image")} alt="Zoomable" />
         {!showVideo && (
           <ButtonIconTogle
             handleClick={() => setShowVideo(true)}
@@ -55,31 +65,21 @@ const InteractiveMap = (): ReactElement => {
           />
         )}
         {showVideo && (
-          <video
-            autoPlay
-            playsInline
-            preload="auto"
-            style={{
+          <VideoPlayer
+            videoUrl={t("video-1")}
+            onEnded={() => setShowVideo(false)}
+            onError={(e) => logger.error("Video error:", e)}
+            styles={{
               width: "500px",
               height: "auto",
               position: "absolute",
               top: "62%",
               left: "47%",
             }}
-            onEnded={() => {
-              setShowVideo(false);
-            }}
-            onError={(e) => {
-              logger.error("Video error:", e);
-            }}
-          >
-            <source src={t("video-1")} type="video/webm" />
-            <source src={t("video-1").replace(".webm", ".mp4")} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          />
         )}
-      </div>
-    </div>
+      </MapContainer>
+    </Wrapper>
   );
 };
 

@@ -17,6 +17,7 @@ const Button = styled(motion.button)`
   padding: 6px;
   height: 100px;
   width: 100px;
+  will-change: transform;
 `;
 
 const ANIMATION_CONFIG = {
