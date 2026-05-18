@@ -17,7 +17,7 @@ const Button = styled.button<{ $isWatched?: boolean }>`
   padding: 6px;
   height: 100px;
   width: 100px;
-  animation: ${props => props.$isWatched ? 'none' : 'float 3s ease-in-out infinite'};
+  animation: ${(props) => (props.$isWatched ? "none" : "float 3s ease-in-out infinite")};
 
   @keyframes float {
     0%,

@@ -4,6 +4,7 @@ import { useJourneyStarted } from "@/client/store/user-journey-store";
 import { useTranslation } from "react-i18next";
 import InteractiveMap from "../interactive-map/InteractiveMap";
 import ButtonIconTogle from "@/client/UI/button-icon-togle/ButtonIconTogle";
+import InteractiveIberiaMap from "../interactive-iberia-map/InteractiveIberiMap";
 
 const WidgetEntry = () => {
   const { t } = useTranslation();
@@ -44,6 +45,7 @@ const WidgetEntry = () => {
             </motion.div>
           )}
         </AnimatePresence>
+        <InteractiveIberiaMap />
       </div>
     </>
   );

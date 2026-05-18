@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 const ButtonWrapper = styled.div<{ $delay: number }>`
   position: absolute;
   animation: fadeInScale 0.4s ease-out forwards;
-  animation-delay: ${props => props.$delay}s;
+  animation-delay: ${(props) => props.$delay}s;
   opacity: 0;
 
   @keyframes fadeInScale {
@@ -139,8 +139,8 @@ const InteractiveMap = (): ReactElement => {
 
         {!activeVideoId &&
           journeyItems.map((item, index) => (
-            <ButtonWrapper 
-              key={item.id} 
+            <ButtonWrapper
+              key={item.id}
               $delay={index * 0.3}
               style={{
                 ...item.buttonPosition,
