@@ -160,8 +160,10 @@ const InteractiveIberiaMap = () => {
   const [placedElements, setPlacedElements] = useState<Set<number>>(new Set());
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isWinner, setIsWinner] = useState(false);
   const audioErrorRef = useRef<HTMLAudioElement>(null);
   const audioSuccessRef = useRef<HTMLAudioElement>(null);
+  const audioWinnerRef = useRef<HTMLAudioElement>(null);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -182,6 +184,15 @@ const InteractiveIberiaMap = () => {
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    if (isWinner && audioWinnerRef.current) {
+      audioWinnerRef.current.currentTime = 0;
+      audioWinnerRef.current.play().catch((error) => {
+        console.error("Audio play failed:", error);
+      });
+    }
+  }, [isWinner]);
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { operation } = event;
 
@@ -192,12 +203,20 @@ const InteractiveIberiaMap = () => {
 
     // Перевірка чи елемент покладений у правильну зону
     if (draggedId === dropZoneId) {
-      setPlacedElements((prev) => new Set([...prev, draggedId]));
+      const newPlacedElements = new Set([...placedElements, draggedId]);
+      setPlacedElements(newPlacedElements);
       // Показуємо успіх
       setIsSuccess(true);
       setTimeout(() => {
         setIsSuccess(false);
       }, 500);
+      
+      // Перевірка чи всі елементи розміщені
+      if (newPlacedElements.size === mapElements.length) {
+        setTimeout(() => {
+          setIsWinner(true);
+        }, 600);
+      }
     } else {
       // Показуємо помилку
       setIsError(true);
@@ -247,6 +266,7 @@ const InteractiveIberiaMap = () => {
       </DragDropProvider>
       <audio ref={audioErrorRef} src={t("error-sound")} preload="auto" />
       <audio ref={audioSuccessRef} src={t("access-sound")} preload="auto" />
+      <audio ref={audioWinnerRef} src={t("winner-sound")} preload="auto" />
     </Container>
   );
 };
