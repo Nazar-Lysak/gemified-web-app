@@ -168,28 +168,40 @@ const InteractiveIberiaMap = () => {
 
   useEffect(() => {
     if (isError && audioErrorRef.current) {
-      audioErrorRef.current.currentTime = 0; // Скидаємо на початок
-      audioErrorRef.current.play().catch((error) => {
-        console.error("Audio play failed:", error);
-      });
+      const audio = audioErrorRef.current;
+      const src = audio.src;
+      if (src && src.startsWith('http')) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {
+          // Ігноруємо помилки програвання
+        });
+      }
     }
   }, [isError]);
 
   useEffect(() => {
     if (isSuccess && audioSuccessRef.current) {
-      audioSuccessRef.current.currentTime = 0;
-      audioSuccessRef.current.play().catch((error) => {
-        console.error("Audio play failed:", error);
-      });
+      const audio = audioSuccessRef.current;
+      const src = audio.src;
+      if (src && src.startsWith('http')) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {
+          // Ігноруємо помилки програвання
+        });
+      }
     }
   }, [isSuccess]);
 
   useEffect(() => {
     if (isWinner && audioWinnerRef.current) {
-      audioWinnerRef.current.currentTime = 0;
-      audioWinnerRef.current.play().catch((error) => {
-        console.error("Audio play failed:", error);
-      });
+      const audio = audioWinnerRef.current;
+      const src = audio.src;
+      if (src && src.startsWith('http')) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {
+          // Ігноруємо помилки програвання
+        });
+      }
     }
   }, [isWinner]);
 
